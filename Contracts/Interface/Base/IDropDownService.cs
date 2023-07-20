@@ -1,0 +1,15 @@
+﻿using Contracts.Dto.Base;
+using Contracts.InputModels.FilterModels.Base;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Contracts.Interface.Base
+{
+    public  interface IDropDownService
+    {
+        Task<GSActionResult<IEnumerable<DropDownDto>>> GetAll(DropDownFilter filter);
+    }
+}
