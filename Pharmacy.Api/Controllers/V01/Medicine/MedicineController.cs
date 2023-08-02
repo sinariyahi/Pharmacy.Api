@@ -66,6 +66,54 @@ namespace Pharmacy.Api.Controllers.V01.Medicine
         }
 
         /// <summary>
+        /// Patient purchase history
+        /// </summary>
+        [HttpGet("patientPurchasePopUp")]
+        public async Task<IActionResult> PatientPurchasePopUp([FromQuery] string filterModel)
+        {
+            {
+                var c = JsonConvert.DeserializeObject<PatientMedicinePurchaseFilterModel>(filterModel);
+                return Ok(await service.PatientPurchasePopUp(c));
+            }
+        }
+
+        /// <summary>
+        /// pharmacy purchase history
+        /// </summary>
+        [HttpGet("pharmacyPurchasePopUp")]
+        public async Task<IActionResult> PharmacyPurchasePopUp([FromQuery] string filterModel)
+        {
+            {
+                var c = JsonConvert.DeserializeObject<PharmacyMedicinePurchaseFilterModel>(filterModel);
+                return Ok(await service.PharmacyPurchasePopUp(c));
+            }
+        }
+
+        /// <summary>
+        /// History of Medicine expiration
+        /// </summary>
+        [HttpGet("medicineExpirationPopUp")]
+        public async Task<IActionResult> MedicineExpirationPopUp([FromQuery] string filterModel)
+        {
+            {
+                var c = JsonConvert.DeserializeObject<MedicineExpirationFilterModel>(filterModel);
+                return Ok(await service.MedicineExpirationPopUp(c));
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        [HttpPost("saveOrderMedicine")]
+        public async Task<IActionResult> SaveOrderMedicine([FromBody] OrderMedicineInfo obj)
+        {
+
+            var result = await service.SaveOrderMedicine(obj);
+            return Ok(result);
+
+
+        }
+        /// <summary>
         /// File upload
         /// <summary>
         [HttpPost("uploadFile")]

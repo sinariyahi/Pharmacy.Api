@@ -97,6 +97,15 @@ namespace Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Medicine_OrderMedicine.
+        /// </summary>
+        public static string Medicine_OrderMedicine {
+            get {
+                return ResourceManager.GetString("Medicine_OrderMedicine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pharmacy_DropDown.
         /// </summary>
         public static string Pharmacy_DropDown {

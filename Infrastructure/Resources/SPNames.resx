@@ -129,6 +129,9 @@
   <data name="DB_Pharmacy_GetInfo" xml:space="preserve">
     <value>DB_Pharmacy_GetInfo</value>
   </data>
+  <data name="Medicine_OrderMedicine" xml:space="preserve">
+    <value>Medicine_OrderMedicine</value>
+  </data>
   <data name="Pharmacy_DropDown" xml:space="preserve">
     <value>Pharmacy_DropDown</value>
   </data>
