@@ -21,8 +21,8 @@ namespace Pharmacy.Api.Controllers.V01.Patient
 
         private readonly IUploadService _uploadService;
         private readonly string[] filteTypes = { "jpg", "jpeg", "png", "rar", "zip" };
-        private readonly string destinationPath = "\\Mod_Project\\projectManagement";
-
+        private readonly string destinationPath = "\\Mod_Project\\patient";
+        
         public PatientController(IPatientService service, IAuthenticateService _authenticateService, IUploadService uploadService, IAttachmentService attachmentService) : base(_authenticateService, attachmentService, service)
         {
             this.service = service;

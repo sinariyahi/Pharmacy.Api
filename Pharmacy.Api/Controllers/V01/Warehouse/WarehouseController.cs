@@ -19,7 +19,7 @@ namespace Pharmacy.Api.Controllers.V01.Warehouse
 
         private readonly IUploadService _uploadService;
         private readonly string[] filteTypes = { "jpg", "jpeg", "png", "rar", "zip" };
-        private readonly string destinationPath = "\\Mod_Project\\projectManagement";
+        private readonly string destinationPath = "\\Mod_Project\\warehouse";
 
         public WarehouseController(IWarehouseService service, IAuthenticateService _authenticateService, IUploadService uploadService, IAttachmentService attachmentService) : base(_authenticateService, attachmentService, service)
         {

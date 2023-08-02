@@ -18,10 +18,9 @@ namespace Pharmacy.Api.Controllers.V01.Pharmacy
     public class PharmacyController : AuthBaseWithAttachmentController<long>
     {
         private readonly IPharmacyService service;
-
         private readonly IUploadService _uploadService;
         private readonly string[] filteTypes = { "jpg", "jpeg", "png", "rar", "zip" };
-        private readonly string destinationPath = "\\Mod_Project\\projectManagement";
+        private readonly string destinationPath = "\\Mod_Project\\pharmacy";
 
         public PharmacyController(IPharmacyService service, IAuthenticateService _authenticateService, IUploadService uploadService, IAttachmentService attachmentService) : base(_authenticateService, attachmentService, service)
         {
