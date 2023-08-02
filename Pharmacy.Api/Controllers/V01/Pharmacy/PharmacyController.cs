@@ -1,6 +1,7 @@
 ﻿using Contracts.InputModels.DataEntryModels.Pharmacy;
 using Contracts.InputModels.DataEntryModels.Warehouse;
 using Contracts.InputModels.FilterModels.Base;
+using Contracts.InputModels.FilterModels.Patient;
 using Contracts.InputModels.FilterModels.Pharmacy;
 using Contracts.InputModels.FilterModels.Warehouse;
 using Contracts.Interface.Personnel;
@@ -43,6 +44,45 @@ namespace Pharmacy.Api.Controllers.V01.Pharmacy
             }
 
         }
+
+        /// <summary>
+        /// Personnel History
+        /// </summary>
+        [HttpGet("personnelHistoryPopUp")]
+        public async Task<IActionResult> PersonnelHistoryPopUp([FromQuery] string filterModel)
+        {
+            {
+                var c = JsonConvert.DeserializeObject<PersonnelHistoryFilterModel>(filterModel);
+                return Ok(await service.PersonnelHistoryPopUp(c));
+            }
+        }
+
+        /// <summary>
+        /// Medicine Histor
+        /// </summary>
+        [HttpGet("medicineHistoryPopUp")]
+        public async Task<IActionResult> MedicineHistoryPopUp([FromQuery] string filterModel)
+        {
+            {
+                var c = JsonConvert.DeserializeObject<MedicineHistoryFilterModel>(filterModel);
+                return Ok(await service.MedicineHistoryPopUp(c));
+            }
+        }
+
+
+        /// <summary>
+        /// Patient History
+        /// </summary>
+        [HttpGet("patientHistoryPopUp")]
+        public async Task<IActionResult> PatientHistoryPopUp([FromQuery] string filterModel)
+        {
+            {
+                var c = JsonConvert.DeserializeObject<patientHistoryFilterModel>(filterModel);
+                return Ok(await service.PatientHistoryPopUp(c));
+            }
+        }
+
+
         /// <summary>
         /// Save the new pharmacy
         /// <summary>

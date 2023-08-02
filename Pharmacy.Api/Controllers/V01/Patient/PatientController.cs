@@ -67,7 +67,7 @@ namespace Pharmacy.Api.Controllers.V01.Patient
         }
 
         /// <summary>
-        /// 
+        /// patient History
         /// </summary>
         [HttpGet("patientHistoryPopUp")]
         public async Task<IActionResult> PatientHistoryPopUp([FromQuery] string filterModel)

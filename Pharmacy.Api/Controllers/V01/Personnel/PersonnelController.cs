@@ -58,7 +58,7 @@ namespace Pharmacy.Api.Controllers.V01.Personnel
         }
 
         /// <summary>
-        /// 
+        /// Warehouse Personnel History
         /// </summary>
         [HttpGet("warehousePersonnelHistoryPopUp")]
         public async Task<IActionResult> WarehousePersonnelHistoryPopUp([FromQuery] string filterModel)
@@ -70,7 +70,7 @@ namespace Pharmacy.Api.Controllers.V01.Personnel
         }
 
         /// <summary>
-        /// 
+        /// pharmacy Personnel History
         /// </summary>
         [HttpGet("pharmacyPersonnelHistoryPopUp")]
         public async Task<IActionResult> PharmacyPersonnelHistoryPopUp([FromQuery] string filterModel)
