@@ -141,6 +141,9 @@
   <data name="Pharmacy_GetAllUserByCase" xml:space="preserve">
     <value>Pharmacy_GetAllUserByCase</value>
   </data>
+  <data name="Pharmacy_GetParishs" xml:space="preserve">
+    <value>Pharmacy_GetParishs</value>
+  </data>
   <data name="Pharmacy_GetPersonelInfo" xml:space="preserve">
     <value>Pharmacy_GetPersonelInfo</value>
   </data>

@@ -1,4 +1,5 @@
-﻿using Contracts.Dto.Pharmacy;
+﻿using Contracts.Dto.Base;
+using Contracts.Dto.Pharmacy;
 using Contracts.Dto.Warehouse;
 using Contracts.InputModels.DataEntryModels.Pharmacy;
 using Contracts.InputModels.DataEntryModels.Warehouse;
@@ -13,5 +14,6 @@ namespace Contracts.Interface.Warehouse
 {
     public interface IWarehouseService : IGenericService<WarehouseDto, WarehouseInfo>, IGenericAttachmentService
     {
+        Task<GSActionResult<IEnumerable<AutocompleteDto>>> GetAllAutoComplete(string term, int cityId);
     }
 }

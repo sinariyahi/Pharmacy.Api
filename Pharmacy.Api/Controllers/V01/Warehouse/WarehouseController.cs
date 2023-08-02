@@ -64,6 +64,16 @@ namespace Pharmacy.Api.Controllers.V01.Warehouse
         }
 
         /// <summary>
+        /// Show Parish 
+        /// </summary>        
+        [HttpGet("acList")]
+        public async Task<IActionResult> Get(string term, int cityId)
+        {
+            return Ok(await service.GetAllAutoComplete(term, cityId));
+
+        }
+
+        /// <summary>
         /// File upload
         /// <summary>
         [HttpPost("uploadFile")]

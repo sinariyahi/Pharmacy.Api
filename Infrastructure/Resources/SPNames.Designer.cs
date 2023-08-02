@@ -133,6 +133,15 @@ namespace Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pharmacy_GetParishs.
+        /// </summary>
+        public static string Pharmacy_GetParishs {
+            get {
+                return ResourceManager.GetString("Pharmacy_GetParishs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pharmacy_GetPersonelInfo.
         /// </summary>
         public static string Pharmacy_GetPersonelInfo {

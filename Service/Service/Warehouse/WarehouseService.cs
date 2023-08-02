@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Contracts.Dto.Base;
 using Contracts.Dto.Personnel;
 using Contracts.Dto.Warehouse;
 using Contracts.InputModels.DataEntryModels.Personnel;
@@ -22,10 +23,12 @@ namespace Service.Service.Warehouse
     {
 
         private readonly IGenericRepository<WarehouseDto, WarehouseInfo> repo;
-        public WarehouseService(IGenericRepository<WarehouseDto, WarehouseInfo> repository)
+        private readonly IGenericRepository<ParishDto, ParishDto> parish;
+        public WarehouseService(IGenericRepository<WarehouseDto, WarehouseInfo> repository, IGenericRepository<ParishDto, ParishDto> _parish)
         : base(repository, SPNames.Pharmacy_Warehouse_GetAll, SPNames.Pharmacy_Warehouse_ByCase, SPNames.Pharmacy_Warehouse_GetInfo, SPNames.Pharmacy_Warehouse_CU)
         {
             this.repo = repository;
+            parish = _parish;
         }
         #region Save
         public override async Task<GSActionResult<object>> Save(object warehouse)
@@ -59,6 +62,25 @@ namespace Service.Service.Warehouse
 
             }
 
+        }
+
+        #endregion
+        #region Parish
+
+        public async Task<GSActionResult<IEnumerable<AutocompleteDto>>> GetAllAutoComplete(string term, int cityId)
+        {
+            var result = new GSActionResult<IEnumerable<AutocompleteDto>>();
+            var list = new List<AutocompleteDto>();
+            IEnumerable<ParishDto>[] x = (await Task.WhenAll(parish.GetAllSingle(SPNames.Pharmacy_GetParishs, new { term, cityId })));
+
+            foreach (ParishDto item in x[0])
+            {
+                list.Add(new AutocompleteDto { Id = item.Id, Label = item.ParishName });
+
+            }
+         (result.Data) = list;
+            result.IsSuccess = true;
+            return result;
         }
 
         #endregion
