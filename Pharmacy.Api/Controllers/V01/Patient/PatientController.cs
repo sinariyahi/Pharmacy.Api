@@ -1,6 +1,7 @@
 ﻿using Contracts.InputModels.DataEntryModels.Patient;
 using Contracts.InputModels.DataEntryModels.Personnel;
 using Contracts.InputModels.FilterModels.Base;
+using Contracts.InputModels.FilterModels.Medicine;
 using Contracts.InputModels.FilterModels.Patient;
 using Contracts.InputModels.FilterModels.Personnel;
 using Contracts.Interface.Medicine;
@@ -63,6 +64,18 @@ namespace Pharmacy.Api.Controllers.V01.Patient
         {
             var result = await service.GetInfo(id);
             return Ok(result);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [HttpGet("patientHistoryPopUp")]
+        public async Task<IActionResult> PatientHistoryPopUp([FromQuery] string filterModel)
+        {
+            {
+                var c = JsonConvert.DeserializeObject<PatientHistoryFilterModel>(filterModel);
+                return Ok(await service.PatientHistoryPopUp(c));
+            }
         }
 
         /// <summary>

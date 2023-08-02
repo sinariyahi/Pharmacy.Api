@@ -102,7 +102,7 @@ namespace Pharmacy.Api.Controllers.V01.Medicine
         }
 
         /// <summary>
-        ///
+        /// Order Medicine
         /// </summary>
         [HttpPost("saveOrderMedicine")]
         public async Task<IActionResult> SaveOrderMedicine([FromBody] OrderMedicineInfo obj)
