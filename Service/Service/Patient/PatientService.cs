@@ -1,4 +1,5 @@
-﻿using Contracts.Dto.Medicine;
+﻿using Contracts;
+using Contracts.Dto.Medicine;
 using Contracts.Dto.Patient;
 using Contracts.InputModels.DataEntryModels.Medicine;
 using Contracts.InputModels.DataEntryModels.Patient;
@@ -10,6 +11,7 @@ using Service.Service.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,6 +25,44 @@ namespace Service.Service.Patient
         {
             this.repo = repository;
         }
+        #region Save
+        public override async Task<GSActionResult<object>> Save(object patient)
+        {
+            var result = new GSActionResult<object>();
+            try
+            {
+                var t = (PatientInfo)patient;
+                result.Data = await repo.Insert(SPNames.Pharmacy_Patient_CU, new
+                {
+
+                    t.Id,
+                    t.FirstName,
+                    t.LastName,
+                    t.Mobile,
+                    t.HomeTel,
+                    t.NationalCode,
+                    t.Address,
+                    t.Province,
+                    t.City,
+                    t.PharmacyName,
+                    t.MedicineName
+                });
+
+                result.IsSuccess = true;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message.Substring(0, (ex.Message.Length > 100) ? 100 : ex.Message.Length);
+                result.Data = result.Message;
+                result.IsSuccess = false;
+                return result;
+
+            }
+
+        }
+
+        #endregion
         #region attachments
         public string getAttachmentProcedure()
         {

@@ -1,6 +1,8 @@
-﻿using Contracts.Dto.Personnel;
+﻿using Contracts;
+using Contracts.Dto.Personnel;
 using Contracts.Dto.Warehouse;
 using Contracts.InputModels.DataEntryModels.Personnel;
+using Contracts.InputModels.DataEntryModels.Pharmacy;
 using Contracts.InputModels.DataEntryModels.Warehouse;
 using Contracts.Interface.Personnel;
 using Contracts.Interface.Shared;
@@ -10,6 +12,7 @@ using Service.Service.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +27,41 @@ namespace Service.Service.Warehouse
         {
             this.repo = repository;
         }
+        #region Save
+        public override async Task<GSActionResult<object>> Save(object warehouse)
+        {
+            var result = new GSActionResult<object>();
+            try
+            {
+                var t = (WarehouseInfo)warehouse;
+                result.Data = await repo.Insert(SPNames.Pharmacy_Warehouse_CU, new
+                {
+                    t.Id,
+                    t.StartDate,
+                    t.FirstName,
+                    t.MedicineNumber,
+                    t.PersonnelNumber,
+                    t.Address,
+                    t.Province,
+                    t.Mobile,
+                    t.Tel
+                });
+
+                result.IsSuccess = true;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message.Substring(0, (ex.Message.Length > 100) ? 100 : ex.Message.Length);
+                result.Data = result.Message;
+                result.IsSuccess = false;
+                return result;
+
+            }
+
+        }
+
+        #endregion
         #region attachments
         public string getAttachmentProcedure()
         {

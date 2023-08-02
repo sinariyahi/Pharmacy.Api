@@ -1,4 +1,5 @@
-﻿using Contracts.Dto.Medicine;
+﻿using Contracts;
+using Contracts.Dto.Medicine;
 using Contracts.InputModels.DataEntryModels.Medicine;
 using Contracts.Interface.Medicine;
 using Contracts.Interface.Shared;
@@ -20,6 +21,40 @@ namespace Service.Service.Medicine
         {
             this.repo = repository;
         }
+        #region Save
+        public override async Task<GSActionResult<object>> Save(object medicine)
+        {
+            var result = new GSActionResult<object>();
+            try
+            {
+                var t = (MedicineInfo)medicine;
+                result.Data = await repo.Insert(SPNames.Pharmacy_Medicine_CU, new
+                {
+                    t.Id,
+                    t.PharmacyName,
+                    t.WarehouseName,
+                    t.PatientName,
+                    t.StartDate,
+                    t.EndDate,
+                    t.MedicineName
+
+                });
+
+                result.IsSuccess = true;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message.Substring(0, (ex.Message.Length > 100) ? 100 : ex.Message.Length);
+                result.Data = result.Message;
+                result.IsSuccess = false;
+                return result;
+
+            }
+
+        }
+        #endregion
+
         #region attachments
         public string getAttachmentProcedure()
         {
