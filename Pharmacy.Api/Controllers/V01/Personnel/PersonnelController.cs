@@ -1,6 +1,7 @@
 ﻿using Contracts.InputModels.DataEntryModels.Personnel;
 using Contracts.InputModels.DataEntryModels.Pharmacy;
 using Contracts.InputModels.FilterModels.Base;
+using Contracts.InputModels.FilterModels.Patient;
 using Contracts.InputModels.FilterModels.Personnel;
 using Contracts.InputModels.FilterModels.Pharmacy;
 using Contracts.Interface.Patient;
@@ -55,6 +56,31 @@ namespace Pharmacy.Api.Controllers.V01.Personnel
             var result = await service.Save(pharmacy);
             return Ok(result);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [HttpGet("warehousePersonnelHistoryPopUp")]
+        public async Task<IActionResult> WarehousePersonnelHistoryPopUp([FromQuery] string filterModel)
+        {
+            {
+                var c = JsonConvert.DeserializeObject<WarehousePersonnelFilterModel>(filterModel);
+                return Ok(await service.WarehousePersonnelHistoryPopUp(c));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [HttpGet("pharmacyPersonnelHistoryPopUp")]
+        public async Task<IActionResult> PharmacyPersonnelHistoryPopUp([FromQuery] string filterModel)
+        {
+            {
+                var c = JsonConvert.DeserializeObject<PharmacyPersonnelFilterModel>(filterModel);
+                return Ok(await service.PharmacyPersonnelHistoryPopUp(c));
+            }
+        }
+
         /// <summary>
         /// Show personnel information
         /// </summary>
