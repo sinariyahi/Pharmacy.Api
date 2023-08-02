@@ -2,9 +2,9 @@
 using Contracts.Dto.Base;
 using Contracts.Dto.Personnel;
 using Contracts.Dto.Warehouse;
-using Contracts.InputModels.DataEntryModels.Personnel;
-using Contracts.InputModels.DataEntryModels.Pharmacy;
 using Contracts.InputModels.DataEntryModels.Warehouse;
+using Contracts.InputModels.FilterModels.Pharmacy;
+using Contracts.InputModels.FilterModels.Warehouse;
 using Contracts.Interface.Personnel;
 using Contracts.Interface.Shared;
 using Contracts.Interface.Warehouse;
@@ -16,6 +16,10 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using MedicineHistory = Contracts.InputModels.DataEntryModels.Warehouse.MedicineHistory;
+using MedicineHistoryFilterModel = Contracts.InputModels.FilterModels.Warehouse.MedicineHistoryFilterModel;
+using PersonnelHistory = Contracts.InputModels.DataEntryModels.Warehouse.PersonnelHistory;
+using PersonnelHistoryFilterModel = Contracts.InputModels.FilterModels.Warehouse.PersonnelHistoryFilterModel;
 
 namespace Service.Service.Warehouse
 {
@@ -24,12 +28,51 @@ namespace Service.Service.Warehouse
 
         private readonly IGenericRepository<WarehouseDto, WarehouseInfo> repo;
         private readonly IGenericRepository<ParishDto, ParishDto> parish;
-        public WarehouseService(IGenericRepository<WarehouseDto, WarehouseInfo> repository, IGenericRepository<ParishDto, ParishDto> _parish)
+        private readonly IGenericRepository<PersonnelHistory, PersonnelHistory> personnel;
+        private readonly IGenericRepository<PharmacyHistory, PharmacyHistory> pharmacy;
+        private readonly IGenericRepository<MedicineHistory, MedicineHistory> medicine;
+        public WarehouseService(IGenericRepository<WarehouseDto, WarehouseInfo> repository, IGenericRepository<ParishDto, ParishDto> _parish
+            , IGenericRepository<PersonnelHistory, PersonnelHistory> _personnel, IGenericRepository<PharmacyHistory, PharmacyHistory> _pharmacy, IGenericRepository<MedicineHistory, MedicineHistory> _medicine)
         : base(repository, SPNames.Pharmacy_Warehouse_GetAll, SPNames.Pharmacy_Warehouse_ByCase, SPNames.Pharmacy_Warehouse_GetInfo, SPNames.Pharmacy_Warehouse_CU)
         {
             this.repo = repository;
             parish = _parish;
+            personnel = _personnel;
+            pharmacy = _pharmacy;
+            medicine = _medicine;
         }
+        #region
+
+        public async Task<GSActionResult<IEnumerable<PersonnelHistory>>> PersonnelHistoryPopUp(PersonnelHistoryFilterModel filter)
+        {
+            var result = new GSActionResult<IEnumerable<PersonnelHistory>>();
+            (result.Data, result.RowCount) = await personnel.GetAll("GetAllPersonnelHistoryPopUp", filter);
+            result.IsSuccess = true;
+            result.Page = filter.PageNumber;
+            return result;
+        }
+
+
+        public async Task<GSActionResult<IEnumerable<PharmacyHistory>>> PharmacyHistoryPopUp(PharmacyHistoryFilterModel filter)
+        {
+            var result = new GSActionResult<IEnumerable<PharmacyHistory>>();
+            (result.Data, result.RowCount) = await pharmacy.GetAll("GetAllPharmacyHistoryPopUp", filter);
+            result.IsSuccess = true;
+            result.Page = filter.PageNumber;
+            return result;
+        }
+
+
+        public async Task<GSActionResult<IEnumerable<MedicineHistory>>> MedicineHistoryPopUp(MedicineHistoryFilterModel filter)
+        {
+            var result = new GSActionResult<IEnumerable<MedicineHistory>>();
+            (result.Data, result.RowCount) = await medicine.GetAll("GetAllMedicineHistoryPopUp", filter);
+            result.IsSuccess = true;
+            result.Page = filter.PageNumber;
+            return result;
+        }
+
+        #endregion
         #region Save
         public override async Task<GSActionResult<object>> Save(object warehouse)
         {

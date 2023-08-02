@@ -1,5 +1,6 @@
 ﻿using Contracts.InputModels.DataEntryModels.Warehouse;
 using Contracts.InputModels.FilterModels.Base;
+using Contracts.InputModels.FilterModels.Pharmacy;
 using Contracts.InputModels.FilterModels.Warehouse;
 using Contracts.Interface.Pharmacy;
 using Contracts.Interface.Security;
@@ -9,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Service.Service.Shared;
 using System.Threading.Tasks;
+using MedicineHistoryFilterModel = Contracts.InputModels.FilterModels.Warehouse.MedicineHistoryFilterModel;
+using PersonnelHistoryFilterModel = Contracts.InputModels.FilterModels.Warehouse.PersonnelHistoryFilterModel;
 
 namespace Pharmacy.Api.Controllers.V01.Warehouse
 {
@@ -71,6 +74,42 @@ namespace Pharmacy.Api.Controllers.V01.Warehouse
         {
             return Ok(await service.GetAllAutoComplete(term, cityId));
 
+        }
+
+        /// <summary>
+        /// Personnel History
+        /// </summary>
+        [HttpGet("personnelHistoryPopUp")]
+        public async Task<IActionResult> PersonnelHistoryPopUp([FromQuery] string filterModel)
+        {
+            {
+                var c = JsonConvert.DeserializeObject<PersonnelHistoryFilterModel>(filterModel);
+                return Ok(await service.PersonnelHistoryPopUp(c));
+            }
+        }
+
+        /// <summary>
+        /// Pharmacy History
+        /// </summary>
+        [HttpGet("pharmacyHistoryPopUp")]
+        public async Task<IActionResult> PharmacyHistoryPopUp([FromQuery] string filterModel)
+        {
+            {
+                var c = JsonConvert.DeserializeObject<PharmacyHistoryFilterModel>(filterModel);
+                return Ok(await service.PharmacyHistoryPopUp(c));
+            }
+        }
+
+        /// <summary>
+        /// Medicine History
+        /// </summary>
+        [HttpGet("medicineHistoryPopUp")]
+        public async Task<IActionResult> MedicineHistoryPopUp([FromQuery] string filterModel)
+        {
+            {
+                var c = JsonConvert.DeserializeObject<MedicineHistoryFilterModel>(filterModel);
+                return Ok(await service.MedicineHistoryPopUp(c));
+            }
         }
 
         /// <summary>
