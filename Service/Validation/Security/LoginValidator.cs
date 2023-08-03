@@ -13,9 +13,8 @@ namespace Service.Validation.Security
 
         public LoginValidator()
         {
-            RuleFor(x => x.UserName).NotEmpty().WithMessage("نام کابری را وارد نمایید");
-            // RuleFor(x => x.UserName).MinimumLength(8).WithMessage("حداقل تعداد 8");
-            RuleFor(x => x.Password).NotEmpty().WithMessage("کلمه عبور را وارد نمایید");
+            RuleFor(x => x.UserName).NotEmpty().WithMessage("Enter the username");
+            RuleFor(x => x.Password).NotEmpty().WithMessage("Enter the password");
         }
     }
 }

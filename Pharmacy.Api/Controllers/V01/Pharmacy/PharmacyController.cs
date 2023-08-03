@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Service.Service.Shared;
 using System.Threading.Tasks;
+using MedicineHistoryFilterModel = Contracts.InputModels.FilterModels.Pharmacy.MedicineHistoryFilterModel;
+using PersonnelHistoryFilterModel = Contracts.InputModels.FilterModels.Pharmacy.PersonnelHistoryFilterModel;
 
 namespace Pharmacy.Api.Controllers.V01.Pharmacy
 {

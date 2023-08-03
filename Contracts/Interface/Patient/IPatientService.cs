@@ -15,7 +15,6 @@ namespace Contracts.Interface.Patient
 {
     public interface IPatientService : IGenericService<PatientDto, PatientInfo>, IGenericAttachmentService
     {
-        Task<GSActionResult<IEnumerable<PatientHistory>>> PatientPurchasePopUp(PatientHistoryFilterModel filter);
-        Task<GSActionResult<object>> SavePatient(object obj);
+        Task<GSActionResult<IEnumerable<PatientHistory>>> PatientHistoryPopUp(PatientHistoryFilterModel filter);
     }
 }

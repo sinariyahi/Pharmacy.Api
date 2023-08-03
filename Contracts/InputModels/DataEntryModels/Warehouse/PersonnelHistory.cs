@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contracts.InputModels.DataEntryModels.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Contracts.InputModels.DataEntryModels.Warehouse
 {
-    internal class PersonnelHistory
+    public class PersonnelHistory : BaseDataEntry<long>
     {
     }
 }

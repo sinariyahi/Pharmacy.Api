@@ -13,9 +13,9 @@ namespace Contracts.Interface.Medicine
 {
     public interface IMedicineService : IGenericService<MedicineDto, MedicineInfo>, IGenericAttachmentService
     {
-      Task<GSActionResult<IEnumerable<PatientMedicinePurchase>>> PatientPurchasePop(PatientMedicinePurchaseFilterModel filter);
-      Task<GSActionResult<IEnumerable<PharmacyMedicinePurchase>>> PharmacyPurchasePop(PharmacyMedicinePurchaseFilterModel filter);
-      Task<GSActionResult<IEnumerable<MedicineExpiration>>> MasterPop(MedicineExpirationFilterModel filter);
+      Task<GSActionResult<IEnumerable<PatientMedicinePurchase>>> PatientPurchasePopUp(PatientMedicinePurchaseFilterModel filter);
+      Task<GSActionResult<IEnumerable<PharmacyMedicinePurchase>>> PharmacyPurchasePopUp(PharmacyMedicinePurchaseFilterModel filter);
+      Task<GSActionResult<IEnumerable<MedicineExpiration>>> MedicineExpirationPopUp(MedicineExpirationFilterModel filter);
       Task<GSActionResult<object>> SaveOrderMedicine(object obj);
         
 
